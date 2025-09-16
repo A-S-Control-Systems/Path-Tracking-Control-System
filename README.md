@@ -3,7 +3,7 @@
 # Path-Tracking-Control-System
 </div>
 
-## Overview
+## 📖 Overview & Methodology
 The core of this project is a control system that ensures an autonomous vehicle remains on its designated path. The work is built on two primary stages:
 - ### Kinematic Model Extraction:
 The system uses a kinematic model that represents the vehicle's motion based on its geometry, rather than forces or torques. This model is valid for low-speed motion, large path curvature, and when inclination and bank angles are negligible. It simplifies the vehicle to a bicycle model, where the front and rear wheel pairs are each represented by a single central wheel.
@@ -61,3 +61,23 @@ Table below shows how the simulated car trackes the predefined path (exponential
   </tr>
 </table>
 </div>
+
+## 🚀 Quick Start
+
+### Prerequisites
+- OS/Tooling: `MATLAB 2014a+`
+
+### Installation & Usage
+# Clone repository
+git clone https://github.com/A-S-Control-Systems/Path-Tracking-Control-System
+from the [src](https://github.com/A-S-Control-Systems/Path-Tracking-Control-System/tree/main/src) , run play_me_first.m to initialize the car parameters and define the path to be tracked (you can edit it as wanted), then run the code main.m which automatically run the Kinematic_Model_Delta_Psi_Control.slx to calculate the traversed path, then it simulates it using drawnow.
+
+## 📊 Results & Benchmarks
+- The combined control method of using a geometric approach for orientation error and a PID controller for cross-track error (CTE) solves the problems faced by each individual method.
+
+
+- The orientation-error-based controller alone fails when the vehicle is not close to the path, causing it to follow a path parallel to the desired one instead of converging.
+- The CTE-based controller alone can cause the vehicle to move in the opposite direction of the desired path if its initial position is too far from the road.
+- The combined method prevents the vehicle from being driven in an opposite direction and ensures it moves toward the path.
+- The Matlab Simulink simulation demonstrates that the integrated control strategy achieves acceptable results in path tracking.
+- Simulation results for the combined approach show that both orientation error and cross-track error converge and remain small over time
