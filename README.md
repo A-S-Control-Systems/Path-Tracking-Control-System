@@ -81,3 +81,25 @@ from the [src](https://github.com/A-S-Control-Systems/Path-Tracking-Control-Syst
 - The combined method prevents the vehicle from being driven in an opposite direction and ensures it moves toward the path.
 - The Matlab Simulink simulation demonstrates that the integrated control strategy achieves acceptable results in path tracking.
 - Simulation results for the combined approach show that both orientation error and cross-track error converge and remain small over time
+## 📂 Project Structure
+```
+├ src contains MATLAB codes
+│   ├── play_me_first.m          #initializes the car parameters and defines the path tobe tracked
+│   ├── Kinematic_Model_Delta_Psi_Control.slx       # Simulink file that applies the control scheme to track the path
+│   ├── main.m          # runs the simulation after calling the simulink file
+├ Documentation       # Training data & code
+├ README.md
+
+```
+
+## 📖 Citation
+
+```
+@software{myproject2025,
+  author    = {Ali Deeb and Bisher Alsaleh},
+  title     = {Autonomous 3D Mapping: AI-Optimized LQR-Lyapunov Control System},
+  year      = {2025},
+  publisher = {GitHub},
+  note      = {Supervised by Prof. Iyad Hatem},
+  url       = {https://github.com/B-A-IntelliBots/AI-optimized-LQR-Lyapunov-Control-System}
+}
