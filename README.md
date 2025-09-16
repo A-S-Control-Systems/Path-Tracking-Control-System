@@ -96,10 +96,10 @@ from the [src](https://github.com/A-S-Control-Systems/Path-Tracking-Control-Syst
 
 ```
 @software{myproject2025,
-  author    = {Ali Deeb and Bisher Alsaleh},
-  title     = {Autonomous 3D Mapping: AI-Optimized LQR-Lyapunov Control System},
-  year      = {2025},
+  author    = {Ali Deeb and Saleh Rabea},
+  title     = {Path-Tracking-Control-System},
+  year      = {2023},
   publisher = {GitHub},
-  note      = {Supervised by Prof. Iyad Hatem},
-  url       = {https://github.com/B-A-IntelliBots/AI-optimized-LQR-Lyapunov-Control-System}
+  note      = {Supervised by Dr. Hasan Alahmad, Dr. Samer Suleiman, Eng. Wassim Ahmad},
+  url       = {https://github.com/A-S-Control-Systems/Path-Tracking-Control-System}
 }
