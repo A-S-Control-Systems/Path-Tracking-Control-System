@@ -1,57 +1,67 @@
 <div align="center">
-  
-# Path-Tracking-Control-System
+
+# 🚗 Path Tracking Control System
+
+![MATLAB](https://img.shields.io/badge/MATLAB-v2014a%2B-blue?style=flat-square&logo=Mathworks)
+![Simulink](https://img.shields.io/badge/Simulink-Autonomous%20Control-orange?style=flat-square&logo=Mathworks)
+![Status](https://img.shields.io/badge/Status-Simulation%20Validated-success?style=flat-square)
+
 </div>
+
+---
 
 ## 📖 Overview & Methodology
-The core of this project is a control system that ensures an autonomous vehicle remains on its designated path. The work is built on two primary stages:
-- ### Kinematic Model Extraction:
-The system uses a kinematic model that represents the vehicle's motion based on its geometry, rather than forces or torques. This model is valid for low-speed motion, large path curvature, and when inclination and bank angles are negligible. It simplifies the vehicle to a bicycle model, where the front and rear wheel pairs are each represented by a single central wheel.
+This project implements a **path tracking control system** that ensures an autonomous vehicle follows a predefined trajectory. The work is structured in two main stages:
+
+### 🔹 Kinematic Model Extraction
+- The vehicle is modeled using a **bicycle kinematic model**, valid for:
+  - Low-speed motion  
+  - Large curvature paths  
+  - Negligible bank and inclination angles  
+- The bicycle abstraction represents each axle (front and rear) by a single wheel located at its midpoint.  
 
 <div align="center">
-
-<img width="500" height="500" alt="bicycle model" src="https://github.com/user-attachments/assets/9e18656d-acf9-4d74-85b5-1f0a1ad42fb9" />
+<img width="500" alt="bicycle model" src="https://github.com/user-attachments/assets/9e18656d-acf9-4d74-85b5-1f0a1ad42fb9" />
 </div>
 
-- ### Control Strategy:
-The project proposes a control strategy that combines two methods to handle path-following errors.
+### 🔹 Control Strategy
+The proposed control scheme combines two methods:
 
-1- Orientation Error Handling: This method uses a geometric procedure to relate the steering angle to the orientation error. The goal is to align the vehicle's velocity vector with the tangent of the desired path.
+1. **Orientation Error Handling**  
+   - A geometric procedure relates steering angle to orientation error.  
+   - Aligns the velocity vector with the tangent of the reference path.  
 
-2- Cross-Track Error (CTE) Handling: This method uses a Proportional-Integral-Derivative (PID) controller to modify the steering angle based on the CTE, which is the distance between the vehicle's center of gravity and the path. This action rotates the vehicle's velocity vector toward the path's centerline.
+2. **Cross-Track Error (CTE) Handling**  
+   - A PID controller adjusts the steering angle based on the lateral deviation (CTE).  
+   - Ensures the velocity vector rotates toward the path centerline.  
 
+👉 By combining both, the system avoids the limitations of each method individually (parallel tracking, divergence, or wrong direction).  
 
-By combining these two methods, the system overcomes the individual limitations of each approach, such as following a parallel path or moving in the wrong direction when starting far from the desired course.
-The following figure shows the control scheme used for path tracking.
 <div align="center">
-  
-<img width="500" height="500" alt="q" src="https://github.com/user-attachments/assets/a30dd64a-bad1-464c-8c2e-aa15a788eb6b" />
+<img width="500" alt="control scheme" src="https://github.com/user-attachments/assets/a30dd64a-bad1-464c-8c2e-aa15a788eb6b" />
 </div>
 
+---
 
-## Simulation and Results
-The control system was simulated using the Matlab and Simulink environments. This simulation allows for the real-time testing of the control methods and visualization of the vehicle's motion.
-The simulation environment is structured with the following blocks:
+## 🖥️ Simulation Environment
+The system is implemented and tested in **MATLAB & Simulink**.  
+
+The simulation includes the following blocks:
+
+- **Road Block**: Defines the mathematical expression of the path.  
+- **Sensors Block**: Computes orientation error and cross-track error.  
+- **Controller Block**: Combines PID (for CTE) + geometric approach (for orientation).  
+- **Kinematic Model Block**: Updates vehicle pose using lateral kinematic equations.  
+
 <div align="center">
-
-<img width="700" height="400" alt="e" src="https://github.com/user-attachments/assets/5af1314c-e4d6-4e4a-a620-835130089b4c" />
+<img width="700" alt="simulation structure" src="https://github.com/user-attachments/assets/5af1314c-e4d6-4e4a-a620-835130089b4c" />
 </div>
 
-### Road Block:
-This block contains the mathematical formula for the road, providing the vehicle's X-coordinate and the corresponding road's Y-coordinate and slope.
+---
 
+## 📊 Simulation Results
+The combined controller demonstrates robust path tracking on different reference paths:
 
-### Sensors Block: 
-This block calculates the orientation error and CTE based on the vehicle's current position and the road's mathematical expression.
-
-### Controller Block:
-Here, the combined control strategy is implemented. It applies a PID controller to the CTE and adds the orientation error (with gain) to determine the required slip angle. This is then used to calculate the necessary steering angle.
-
-### Kinematic Model Block:
-This block simulates the vehicle's motion using the lateral kinematic equations, updating the vehicle's X and Y coordinates and its orientation at each instant.
-
-The simulation results confirm that the combined control method effectively tracks the path, solving the problems faced by the individual orientation-based and CTE-based controllers.
-Table below shows how the simulated car trackes the predefined path (exponential path, straigh line path, cosine path )
 <div align="center">
 <table>
   <tr>
@@ -62,32 +72,33 @@ Table below shows how the simulated car trackes the predefined path (exponential
 </table>
 </div>
 
+Key findings:
+- The **orientation-only controller** may cause parallel tracking without convergence.  
+- The **CTE-only controller** can lead to divergence if the vehicle starts far from the path.  
+- The **combined method** ensures convergence and prevents opposite-direction tracking.  
+- Both orientation error and cross-track error converge and remain small over time.  
+
+---
+
 ## 🚀 Quick Start
 
-### Prerequisites
-- OS/Tooling: `MATLAB 2014a+`
+### 🔧 Prerequisites
+- MATLAB **2014a or newer** (with Simulink)
 
-### Installation & Usage
-# Clone repository
+### 📂 Installation & Usage
+```bash
+# Clone the repository
 git clone https://github.com/A-S-Control-Systems/Path-Tracking-Control-System
-from the [src](https://github.com/A-S-Control-Systems/Path-Tracking-Control-System/tree/main/src) , run play_me_first.m to initialize the car parameters and define the path to be tracked (you can edit it as wanted), then run the code main.m which automatically run the Kinematic_Model_Delta_Psi_Control.slx to calculate the traversed path, then it simulates it using drawnow.
-
-## 📊 Results & Benchmarks
-- The combined control method of using a geometric approach for orientation error and a PID controller for cross-track error (CTE) solves the problems faced by each individual method.
-
-
-- The orientation-error-based controller alone fails when the vehicle is not close to the path, causing it to follow a path parallel to the desired one instead of converging.
-- The CTE-based controller alone can cause the vehicle to move in the opposite direction of the desired path if its initial position is too far from the road.
-- The combined method prevents the vehicle from being driven in an opposite direction and ensures it moves toward the path.
-- The Matlab Simulink simulation demonstrates that the integrated control strategy achieves acceptable results in path tracking.
-- Simulation results for the combined approach show that both orientation error and cross-track error converge and remain small over time
-## 📂 Project Structure
 ```
-├ src contains MATLAB codes
-│   ├── play_me_first.m          #initializes the car parameters and defines the path tobe tracked
-│   ├── Kinematic_Model_Delta_Psi_Control.slx       # Simulink file that applies the control scheme to track the path
-│   ├── main.m          # runs the simulation after calling the simulink file
-├ Documentation       # Training data & code
+from the [src](https://github.com/A-S-Control-Systems/Path-Tracking-Control-System/tree/main/src) , run play_me_first.m to initialize the car parameters and define the path to be tracked (you can edit it as you want), then run the code main.m which automatically run the Kinematic_Model_Delta_Psi_Control.slx to calculate the traversed path, then it simulates it using drawnow.
+## 📂 Project Structure
+
+```
+├ src  #contains MATLAB codes
+│   ├── play_me_first.m           # Initializes car parameters & defines path
+│   ├── Kinematic_Model_Delta_Psi_Control.slx       # Simulink model with control scheme
+│   ├── main.m          # Runs the simulation & visualization
+├ Documentation       # Documentation file (PDF)
 ├ README.md
 
 ```
