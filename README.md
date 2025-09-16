@@ -18,3 +18,22 @@ The project proposes a control strategy that combines two methods to handle path
 
 
 By combining these two methods, the system overcomes the individual limitations of each approach, such as following a parallel path or moving in the wrong direction when starting far from the desired course
+
+## Simulation and Results
+The control system was simulated using the Matlab and Simulink environments. This simulation allows for the real-time testing of the control methods and visualization of the vehicle's motion.
+The simulation environment is structured with the following blocks:
+
+### Road Block:
+This block contains the mathematical formula for the road, providing the vehicle's X-coordinate and the corresponding road's Y-coordinate and slope.
+
+
+### Sensors Block: 
+This block calculates the orientation error and CTE based on the vehicle's current position and the road's mathematical expression.
+
+### Controller Block:
+Here, the combined control strategy is implemented. It applies a PID controller to the CTE and adds the orientation error to determine the required slip angle. This is then used to calculate the necessary steering angle.
+
+### Kinematic Model Block:
+This block simulates the vehicle's motion using the lateral kinematic equations, updating the vehicle's X and Y coordinates and its orientation at each instant.
+
+The simulation results confirm that the combined control method effectively tracks the path, solving the problems faced by the individual orientation-based and CTE-based controllers.
