@@ -34,7 +34,7 @@ The control system was simulated using the Matlab and Simulink environments. Thi
 The simulation environment is structured with the following blocks:
 <div align="center">
 
-<img width="1000" height="500" alt="e" src="https://github.com/user-attachments/assets/5af1314c-e4d6-4e4a-a620-835130089b4c" />
+<img width="700" height="400" alt="e" src="https://github.com/user-attachments/assets/5af1314c-e4d6-4e4a-a620-835130089b4c" />
 </div>
 
 ### Road Block:
